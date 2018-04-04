@@ -3,9 +3,13 @@ package com.example.mypc.cloudstorage.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,21 +25,36 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
+import com.alibaba.sdk.android.oss.common.OSSLog;
+import com.alibaba.sdk.android.oss.model.GetObjectRequest;
+import com.alibaba.sdk.android.oss.model.GetObjectResult;
+import com.alibaba.sdk.android.oss.model.ObjectMetadata;
 import com.example.mypc.cloudstorage.R;
+import com.example.mypc.cloudstorage.app.Config;
 import com.example.mypc.cloudstorage.bean.UserBean;
+import com.zzhoujay.markdown.MarkDown;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
 
+import static com.example.mypc.cloudstorage.InitService.oss;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private RelativeLayout appRelativeLayout, smsRelativeLayout, exitRelativeLayout, contactRelativeLayout,imgRelativeLayout;
+    private RelativeLayout appRelativeLayout, smsRelativeLayout, exitRelativeLayout, contactRelativeLayout, imgRelativeLayout;
     private ImageView icon_account;
-    private TextView name_account;
+    private TextView name_account,markdownTextView;
     private UserBean currentUser;
+    InputStream is;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,15 +72,14 @@ public class MainActivity extends AppCompatActivity
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.READ_CONTACTS);
         }
-        if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_CONTACTS)!=PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.WRITE_CONTACTS);
         }
         if (!permissionList.isEmpty()) {
             String[] permissions = permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
-        }
-        else {
-                initView();
+        } else {
+            initView();
         }
     }
 
@@ -71,8 +89,8 @@ public class MainActivity extends AppCompatActivity
         smsRelativeLayout = (RelativeLayout) findViewById(R.id.Re_mail_backup);
         exitRelativeLayout = (RelativeLayout) findViewById(R.id.Re_exit);
         contactRelativeLayout = (RelativeLayout) findViewById(R.id.Re_contact_backup);
-        imgRelativeLayout=(RelativeLayout)findViewById(R.id.Re_pic_backup);
-
+        imgRelativeLayout = (RelativeLayout) findViewById(R.id.Re_pic_backup);
+        markdownTextView = (TextView) findViewById(R.id.markdown_intro);
         appRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,14 +114,14 @@ public class MainActivity extends AppCompatActivity
         contactRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,ContactBackupActivity.class);
+                Intent intent = new Intent(MainActivity.this, ContactBackupActivity.class);
                 startActivity(intent);//联系人备份跳转
             }
         });
         imgRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,ImageBackupActivity.class);
+                Intent intent = new Intent(MainActivity.this, ImageBackupActivity.class);
                 startActivity(intent);
             }
         });
@@ -121,14 +139,14 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
 
-        name_account=(TextView)headerView.findViewById(R.id.name_account);
-        icon_account=(ImageView)headerView.findViewById(R.id.icon_account);
+        name_account = (TextView) headerView.findViewById(R.id.name_account);
+        icon_account = (ImageView) headerView.findViewById(R.id.icon_account);
 
-        currentUser=BmobUser.getCurrentUser(UserBean.class);
-        if (currentUser!=null)
+        currentUser = BmobUser.getCurrentUser(UserBean.class);
+        if (currentUser != null)
             name_account.setText(currentUser.getUsername());
         else {
-            Intent intent=new Intent(this,LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
@@ -140,6 +158,28 @@ public class MainActivity extends AppCompatActivity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+        markdownTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                is = getResources().openRawResource(R.raw.intro);
+                markdownTextView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Spanned spanned = MarkDown.fromMarkdown(is, new Html.ImageGetter() {
+                            @Override
+                            public Drawable getDrawable(String source) {
+                                Drawable drawable = getResources().getDrawable(R.mipmap.ic_launcher);
+                                drawable.setBounds(0, 0, 400, 400);
+                                return drawable;
+                            }
+                        }, markdownTextView);
+                        markdownTextView.setText(spanned);
+                    }
+                });
+                markdownTextView.setGravity(View.FOCUS_LEFT);
+            }
+        });
+
     }
 
     @Override
@@ -196,7 +236,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }else if (id==R.id.nav_exit){
+        } else if (id == R.id.nav_exit) {
             BmobUser.logOut();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);

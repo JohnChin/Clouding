@@ -190,8 +190,22 @@
                     android:text="@string/exit" />
             </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/markdown_intro"
+                android:layout_margin="16dp"
+                android:text="查看帮助"
+                android:gravity="center"/>
+        </android.support.v7.widget.CardView>
 
+    </LinearLayout>
 
 
 </ScrollView>

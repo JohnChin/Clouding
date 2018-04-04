@@ -81,10 +81,8 @@ public class MessageBackupActivity extends AppCompatActivity {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(context);
+            defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(context);//获取默认短信应用
         }
-
-
         baseFile = new File(Config.SMS_FILE_PATH);//短信备份文件本地存储地址
 
 
