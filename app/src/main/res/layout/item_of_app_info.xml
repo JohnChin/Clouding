@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/item_of_app_info">
+
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:id="@+id/app_info_check_title_of_app_icon"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/app_info_check_title_of_app_name"
+            android:text="@string/app_name_check"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            android:layout_weight="0.7"
+            />
+        <TextView
+            android:id="@+id/app_info_check_content_of_app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            android:layout_weight="0.3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_info_check_title_of_app_size"
+        android:text="@string/app_size_check"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:layout_weight="0.7"/>
+        <TextView
+            android:id="@+id/app_info_check_content_of_app_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            android:layout_weight="0.3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_info_check_title_of_app_packgename"
+        android:text="@string/app_pakegename_check"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:layout_weight="0.7"/>
+    <TextView
+        android:id="@+id/app_info_check_content_of_app_packgename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:layout_weight="0.3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/app_info_check_title_of_app_sourceDir"
+            android:text="@string/app_sourceDir_check"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            android:layout_weight="0.7"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_info_check_content_of_app_sourceDir"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:layout_weight="0.3"/>
+    </LinearLayout>
+</LinearLayout>

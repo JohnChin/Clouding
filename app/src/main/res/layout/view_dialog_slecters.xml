@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/linearLayout_buttons">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/upload_sms_text"
+        android:id="@+id/dialog_upload"
+        style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+        android:backgroundTint="@color/white"
+        android:layout_margin="12dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/restore_infos"
+        android:id="@+id/dialog_restore"
+        style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+        android:backgroundTint="@color/white"
+        android:layout_margin="12dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:id="@+id/dialog_delete"
+        style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+        android:backgroundTint="@color/white"
+        android:layout_margin="12dp"
+        />
+
+</LinearLayout>

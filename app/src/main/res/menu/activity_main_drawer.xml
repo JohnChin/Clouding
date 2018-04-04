@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cloud_file_manager"
+            android:icon="@drawable/ic_cloud_24dp"
+            android:title="云端管理" />
+        <item
+            android:id="@+id/nav_apk_upload"
+            android:icon="@drawable/ic_android_24dp"
+            android:title="已导出apk" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="查看图片" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="设置" />
+    </group>
+
+    <item android:title="社交">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="分享" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="共享空间" />
+        </menu>
+    </item>
+
+    <item android:title="个人信息">
+        <menu>
+            <item
+                android:id="@+id/nav_infos_edit"
+                android:icon="@drawable/ic_personal_infos_edit_24dp"
+                android:title="修改资料" />
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/ic_exit_black_24dp"
+                android:title="退出当前账号" />
+        </menu>
+    </item>
+
+</menu>

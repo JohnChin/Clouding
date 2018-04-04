@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linear_register">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Input_account"
+        android:layout_margin="8dp">
+        <EditText
+            android:id="@+id/register_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/new_account"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:maxLength="10" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Input_password"
+        android:layout_below="@+id/Input_account"
+        android:layout_margin="8dp">
+        <EditText
+            android:id="@+id/register_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:maxLength="10" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Input_check_password"
+        android:layout_below="@+id/Input_account"
+        android:layout_margin="8dp">
+        <EditText
+            android:id="@+id/register_check_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:maxLength="10" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Input_sms_code"
+        android:layout_below="@+id/Input_account"
+        android:layout_margin="8dp">
+        <EditText
+            android:id="@+id/register_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone_number"
+            android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="11" />
+
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <EditText
+            android:id="@+id/register_sms_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sms_code"
+            android:maxLines="1"
+            android:maxLength="10"
+            android:layout_weight="0.5"
+            android:inputType="number"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/get_sms_code"
+            android:textColor="@color/white"
+            android:id="@+id/get_sms_code"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/confirm"
+            android:textColor="@color/white"
+            android:id="@+id/confirm_button"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/cancel"
+            android:textColor="@color/dividerColor"
+            android:id="@+id/cancel_button"/>
+    </LinearLayout>
+</LinearLayout>
