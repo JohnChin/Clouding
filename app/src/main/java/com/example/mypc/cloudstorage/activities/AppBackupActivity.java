@@ -41,7 +41,7 @@ public class AppBackupActivity extends AppCompatActivity {
     public List<Application> myapplication;
     public AppInfoProvider appInfoProvider;
     public ApkCatcher apkCatcher;
-    public ProgressDialog dialog, backDialog;
+    public ProgressDialog dialog;
     public Context context;
     private Handler handler = null;
     private TextView dialogAppName, dialogAppSize, dialogAppPack, sourceDir;

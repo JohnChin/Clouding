@@ -103,7 +103,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activities.PersonalProfileActivity"></activity>
+        <activity android:name=".activities.PersonalProfileActivity" />
+        <activity android:name=".activities.SettingActivity"></activity>
     </application>
 
 </manifest>

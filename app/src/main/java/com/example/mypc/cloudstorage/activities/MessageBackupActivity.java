@@ -210,7 +210,7 @@ public class MessageBackupActivity extends AppCompatActivity {
                 ossObjectSummaries.addAll(getInterDataMethods.GetDataFromOss(userName + Config.TYPE_SMS));//获取网站上apk数据
                 LayoutInflater inflater = getLayoutInflater();
                 View dialog = inflater.inflate(R.layout.dialog_app_internet_data, (ViewGroup) findViewById(R.id.liner_internet_data));
-                AlertDialog alertDialogAppInterData = new AlertDialog.Builder(context).setView(dialog).create();
+                AlertDialog alertDialogSmsInterData = new AlertDialog.Builder(context).setView(dialog).create();
                 mRecyclerViewInter = (RecyclerView) dialog.findViewById(R.id.internet_data);
                 mRecyclerViewInter.setLayoutManager(new WrapContentLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
                 mRecyclerViewAdapterInter = new RecyclerViewAdapter<OSSObjectSummary>(context, R.layout.item_backupped_apks, ossObjectSummaries) {
@@ -224,13 +224,14 @@ public class MessageBackupActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(RecyclerView parent, View view, int position) {
                         upDownloadMethods.downloadFile(ossObjectSummaries.get(position).getKey(),Config.TYPE_SMS);
-                        alertDialogAppInterData.dismiss();
+                        alertDialogSmsInterData.dismiss();
                     }
                 });
                 mRecyclerViewInter.setAdapter(mRecyclerViewAdapterInter);
-                alertDialogAppInterData.setTitle("云端apk文件");
-                alertDialogAppInterData.setView(dialog);
-                alertDialogAppInterData.show();
+                alertDialogSmsInterData.setTitle("云端apk文件");
+                alertDialogSmsInterData.setMessage("\n点击下载");
+                alertDialogSmsInterData.setView(dialog);
+                alertDialogSmsInterData.show();
             }
         });
 //        uploadButton.findViewById(R.id.upload_sms_button);

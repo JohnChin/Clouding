@@ -197,7 +197,7 @@ public class ContactBackupActivity extends AppCompatActivity {
                 ossObjectSummaries.addAll(getInterDataMethods.GetDataFromOss(userName+Config.TYPE_CONTACT));//获取网站上联系人数据
                 LayoutInflater inflater = getLayoutInflater();
                 View dialog = inflater.inflate(R.layout.dialog_app_internet_data, (ViewGroup) findViewById(R.id.liner_internet_data));
-                AlertDialog alertDialogAppInterData =new AlertDialog.Builder(context).setView(dialog).create();
+                AlertDialog alertDialogContactInterData =new AlertDialog.Builder(context).setView(dialog).create();
                 mRecyclerViewInter = (RecyclerView)dialog.findViewById(R.id.internet_data);
                 mRecyclerViewInter.setLayoutManager(new WrapContentLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
                 mRecyclerViewAdapterInter=new RecyclerViewAdapter<OSSObjectSummary>(context,R.layout.item_backupped_apks,ossObjectSummaries) {
@@ -211,13 +211,14 @@ public class ContactBackupActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(RecyclerView parent, View view, int position) {
                         upDownloadMethods.downloadFile(ossObjectSummaries.get(position).getKey(),Config.TYPE_CONTACT);
-                        alertDialogAppInterData.dismiss();
+                        alertDialogContactInterData.dismiss();
                     }
                 });
                 mRecyclerViewInter.setAdapter(mRecyclerViewAdapterInter);
-                alertDialogAppInterData.setTitle("云端联系人文件");
-                alertDialogAppInterData.setView(dialog);
-                alertDialogAppInterData.show();
+                alertDialogContactInterData.setTitle("云端联系人文件");
+                alertDialogContactInterData.setMessage("\n点击下载");
+                alertDialogContactInterData.setView(dialog);
+                alertDialogContactInterData.show();
             }
         });
     }

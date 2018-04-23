@@ -12,7 +12,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 import com.alibaba.sdk.android.oss.model.OSSObjectSummary;
 import com.example.mypc.cloudstorage.R;
 import com.example.mypc.cloudstorage.UIFitter.RecyclerViewAdapter;
-import com.example.mypc.cloudstorage.UIFitter.WrapContentLinearLayoutManager;
 import com.example.mypc.cloudstorage.app.Config;
 import com.example.mypc.cloudstorage.bean.Picture;
 import com.example.mypc.cloudstorage.bean.UserBean;
@@ -51,6 +49,9 @@ public class ImageBackupActivity extends AppCompatActivity {
     private LoadImageMethods loadImageMethods;
 
     private String userName;
+    private List<Picture> pictures = new ArrayList<>();
+
+    private UpDownloadMethods upDownloadMethods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +70,13 @@ public class ImageBackupActivity extends AppCompatActivity {
 
         currentUser = BmobUser.getCurrentUser(UserBean.class);
         userName = currentUser.getUsername();
-        UpDownloadMethods upDownloadMethods = new UpDownloadMethods(view, context, currentUser);
+        upDownloadMethods = new UpDownloadMethods(view, context, currentUser);
 
         fabUploadImage = (FloatingActionButton) findViewById(R.id.fab_upload_image);
         fabUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (imagePath.length() == 0)
+                if (imagePath == null)
                     Toast.makeText(context, "请选择图片", Toast.LENGTH_LONG).show();
                 else {
                     File file = new File(imagePath);
@@ -142,16 +143,32 @@ public class ImageBackupActivity extends AppCompatActivity {
         View dialog = inflater.inflate(R.layout.dialog_online_photos, (ViewGroup) findViewById(R.id.liner_online_photos));
         AlertDialog alertDialogImageInterData = new AlertDialog.Builder(context).setView(dialog).create();
         mRecyclerViewInter = (RecyclerView) dialog.findViewById(R.id.online_photos);
-        mRecyclerViewInter.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mRecyclerViewInter.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerViewAdapterInter = new RecyclerViewAdapter<OSSObjectSummary>(context, R.layout.item_online_photos, ossObjectSummaries) {
             @Override
             protected void convert(ViewHolder holder, OSSObjectSummary ossObjectSummary) {
                 Picture picture = new Picture();
                 picture.setKey(ossObjectSummary.getKey());
-                picture.setSource(loadImageMethods.getPicFromBytes(loadImageMethods.asyncGetObjectSample(picture.getKey()), null));
+                BitmapFactory.Options opt = new BitmapFactory.Options();
+
+                opt.inPreferredConfig = Bitmap.Config.RGB_565;
+                opt.inPurgeable = true;
+                opt.inInputShareable = true;
+                opt.inDither=false;
+
+                picture.setSource(loadImageMethods.getPicFromBytes(loadImageMethods.asyncGetObjectSample(picture.getKey()), opt));
+                pictures.add(picture);
                 holder.setImageBitmap(R.id.item_of_photo, picture.getSource());
             }
         };
+
+        mRecyclerViewAdapterInter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position) {
+                upDownloadMethods.downloadFile(pictures.get(position).getKey(), Config.TYPE_IMG);
+                alertDialogImageInterData.dismiss();
+            }
+        });
         mRecyclerViewInter.setAdapter(mRecyclerViewAdapterInter);
         alertDialogImageInterData.setTitle("云端图片文件");
         alertDialogImageInterData.setView(dialog);

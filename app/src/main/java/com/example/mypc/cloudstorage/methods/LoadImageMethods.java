@@ -33,12 +33,10 @@ public class LoadImageMethods {
             @Override
             public void onSuccess(GetObjectRequest request, GetObjectResult result) {
                 // 请求成功
-                request.setxOssProcess("image/resize,m_lfit,w_100,h_100");
+                request.setxOssProcess("image/resize,m_lfit,p_50/quality,q_50");
                 InputStream inputStream = result.getObjectContent();
-
                 byte[] buffer = new byte[2048];
                 ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-
                 int len;
 
                 try {
@@ -72,6 +70,7 @@ public class LoadImageMethods {
                 }
             }
         });
+        task.waitUntilFinished();
         while (imageByteArray == null) {
 
         }

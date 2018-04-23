@@ -83,6 +83,7 @@ public class UpDownloadMethods {
         }
 
         File fileDownload = new File(filepath);
+        fileDownload.getParentFile().mkdir();
         if (!fileDownload.exists()) {
             try {
                 fileDownload.createNewFile();
@@ -242,7 +243,4 @@ public class UpDownloadMethods {
         });
     }
 
-    private static void getObjectToOutputStream(File file, GetObjectResult result) throws IOException {
-
-    }
 }

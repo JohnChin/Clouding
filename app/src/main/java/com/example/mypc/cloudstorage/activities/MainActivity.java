@@ -51,9 +51,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private RelativeLayout appRelativeLayout, smsRelativeLayout, exitRelativeLayout, contactRelativeLayout, imgRelativeLayout;
     private ImageView icon_account;
-    private TextView name_account,markdownTextView;
+    private TextView name_account;
     private UserBean currentUser;
-    InputStream is;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         exitRelativeLayout = (RelativeLayout) findViewById(R.id.Re_exit);
         contactRelativeLayout = (RelativeLayout) findViewById(R.id.Re_contact_backup);
         imgRelativeLayout = (RelativeLayout) findViewById(R.id.Re_pic_backup);
-        markdownTextView = (TextView) findViewById(R.id.markdown_intro);
+//        markdownTextView = (TextView) findViewById(R.id.markdown_intro);
         appRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,27 +157,6 @@ public class MainActivity extends AppCompatActivity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
-        markdownTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                is = getResources().openRawResource(R.raw.intro);
-                markdownTextView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Spanned spanned = MarkDown.fromMarkdown(is, new Html.ImageGetter() {
-                            @Override
-                            public Drawable getDrawable(String source) {
-                                Drawable drawable = getResources().getDrawable(R.mipmap.ic_launcher);
-                                drawable.setBounds(0, 0, 400, 400);
-                                return drawable;
-                            }
-                        }, markdownTextView);
-                        markdownTextView.setText(spanned);
-                    }
-                });
-                markdownTextView.setGravity(View.FOCUS_LEFT);
-            }
-        });
 
     }
 
@@ -240,6 +218,7 @@ public class MainActivity extends AppCompatActivity
             BmobUser.logOut();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

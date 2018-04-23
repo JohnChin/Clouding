@@ -36,7 +36,6 @@ public class ApkCatcher {
             File oldfile = new File(sourceDir);
             if (oldfile.exists()) { //文件存在时
                 InputStream inStream = new FileInputStream(sourceDir); //读入原文件
-
                 toolMethods=new ToolMethods();
                 toolMethods.createDocument(Config.APKS_PATH);
 

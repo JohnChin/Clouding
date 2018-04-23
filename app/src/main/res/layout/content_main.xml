@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:overScrollMode="never"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.mypc.cloudstorage.activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
@@ -15,7 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <RelativeLayout
                 android:id="@+id/Re_mail_backup"
                 android:layout_width="match_parent"
@@ -190,22 +190,7 @@
                     android:text="@string/exit" />
             </RelativeLayout>
         </LinearLayout>
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/markdown_intro"
-                android:layout_margin="16dp"
-                android:text="查看帮助"
-                android:gravity="center"/>
-        </android.support.v7.widget.CardView>
-
     </LinearLayout>
 
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

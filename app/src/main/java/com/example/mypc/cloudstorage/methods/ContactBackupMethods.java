@@ -73,7 +73,7 @@ public class ContactBackupMethods {
         }
     }
 
-    public List<ContactInfo> getContactInfo(InputStream inStream) {//获取短信内容保存在List中
+    public List<ContactInfo> getContactInfo(InputStream inStream) {//获取联系人内容保存在List中
         List<ContactInfo> contactInfos = new ArrayList<>();
         ContactInfo contactInfo = null;
         XmlPullParser pullParser = Xml.newPullParser();

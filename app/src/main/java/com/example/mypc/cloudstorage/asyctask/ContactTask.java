@@ -129,33 +129,5 @@ public class ContactTask extends AsyncTask<Void, Void, String>{
 		pContactDialog.setProgressNumberFormat(proNum + "/" + sumCount);
 	}
 
-	/*private JSONArray array = new JSONArray();
-	public void getContact(View view){
-		ContentResolver resolver = getContentResolver();
-		Uri URI = ContactsContract.Contacts.CONTENT_URI;
-		String[] columns = new String[]{ContactsContract.Contacts._ID, PhoneLookup.DISPLAY_NAME};
-		Cursor cursor = resolver.query(URI, columns, PhoneLookup.HAS_PHONE_NUMBER + "=1", null, null);
-		while(cursor.moveToNext()){
-			String phoneNum = "";
-			Cursor cursor2 = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-					new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER}, 
-					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + cursor.getLong(0), null, null);
-			while(cursor2.moveToNext()){
-				phoneNum += cursor2.getString(0) + "||";
-			}
-			cursor2.close();
-			Log.i(TAG, "-" + cursor.getLong(0) + ":" + cursor.getString(1) + "::" + phoneNum);
-			JSONObject obj = new JSONObject();
-			try {
-				obj.put("id", cursor.getLong(0));
-				obj.put("name", cursor.getLong(1));
-				obj.put("phone", phoneNum);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			array.put(obj);
-		}
-		cursor.close();
-	}*/
 
 }

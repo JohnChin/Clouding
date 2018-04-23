@@ -5,9 +5,9 @@ package com.example.mypc.cloudstorage.bean;
  */
 
 public class XmlBean {
-    private String xmlName;
-    private String fileSize;
-    private String createTime;
+    private String xmlName; //xml名
+    private String fileSize;//xml文件大小
+    private String createTime;//xml创建时间
 
     public String getCreateTime() {
         return createTime;

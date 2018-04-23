@@ -7,11 +7,11 @@ import android.graphics.Bitmap;
  */
 
 public class Picture {
-    private String picName;
+    private String picName;//图片名
+    private String picPath;//图片路径
+    private String key;//图片云端key
+    private Bitmap source;//图片内容
 
-    private String picPath;
-    private String key;
-    private Bitmap source;
     public Bitmap getSource() {
         return source;
     }

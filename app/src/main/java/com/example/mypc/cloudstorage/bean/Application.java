@@ -7,14 +7,14 @@ import android.graphics.drawable.Drawable;
  */
 
 public class Application {
-    private Drawable icon;//
-    private String appName;//
-    private String packageName;//
-    private boolean isSystemApp;//
-    private long codesize;//
-    private String sourceDir;//
-    private String createTime;
-    private String apkSize;
+    private Drawable icon;//应用图标
+    private String appName;//应用名称
+    private String packageName;//包名
+    private boolean isSystemApp;//是否为系统应用
+    private long codesize;//应用大小
+    private String sourceDir;//apk存储位置
+    private String createTime;//创建时间
+    private String apkSize;//apk大小
 
 
     public String getApkSize() {
